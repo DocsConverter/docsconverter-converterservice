@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
+import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.createTempFile;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.getTempFile;
 
 @RestController
@@ -29,6 +30,8 @@ public class FileController {
     @GetMapping(path = "/download/{chatId}/{name}")
     public void download(HttpServletResponse response, @PathVariable Long chatId, @PathVariable String name) throws IOException {
         log.info("DOWNLOAD FILENAME = {}, CHAT_ID = {}", name, chatId.toString());
+
+        System.out.println(createTempFile(chatId, name).getAbsolutePath());
 
         File file = getTempFile(chatId, name);
 
