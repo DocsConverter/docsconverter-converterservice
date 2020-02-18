@@ -40,15 +40,13 @@ public class ReceiveService {
         try {
             if(task.getAction().equals(Command.TO_TEXT)){
                 convertService.convertToText(task.getUrl(), task.getType());
-
-
             } else {
                 String name;
 
                 if(task.getType().equals(TEXT)){
                     String[] split = task.getText().split(" ");
 
-                    name = split[0]+".txt";
+                    name = split[0];
 
                     File file = createTempFile(task.getChatId(), name);
 

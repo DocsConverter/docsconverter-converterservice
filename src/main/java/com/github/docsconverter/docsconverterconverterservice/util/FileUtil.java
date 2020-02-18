@@ -4,10 +4,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import static com.github.docsconverter.docsconverterconverterservice.service.FileService.ROOT_PATH;
 
 public class FileUtil {
+
+    public static File setExtension(File file, String extension){
+        String[] splitName = file.getAbsolutePath().split(".");
+
+        String newName = file.getAbsolutePath().replace(splitName[splitName.length-1], extension);
+
+        File newFile = new File(newName);
+        file.renameTo(newFile);
+
+        return newFile;
+    }
 
     public static File createTempFile(long chatId, String name) throws IOException {
         return File.createTempFile(chatId + "_", "_" + name);
