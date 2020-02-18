@@ -1,7 +1,5 @@
 package com.github.docsconverter.docsconverterconverterservice.util;
 
-import com.github.docsconverter.docsconverterconverterservice.enums.Command;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -9,15 +7,11 @@ import static com.github.docsconverter.docsconverterconverterservice.service.Fil
 
 public class FileUtil {
 
-    public static File setExtension(File file, String extension){
-        String path = file.getAbsolutePath();
-        String[] splitPath = path.split(".");
+    public static File setExtension(File file, String name, String extension){
+        String path = file.getAbsolutePath()
+                .replace(name, name + "." + extension);
 
-        String newName = splitPath.length == 0 ?
-                path + "." + extension :
-                path.replace(splitPath[splitPath.length-1], extension);
-
-        File newFile = new File(newName);
+        File newFile = new File(path);
         file.renameTo(newFile);
 
         return newFile;

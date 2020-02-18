@@ -22,6 +22,8 @@ public class ConvertService {
 
         File file = createTempFile(chatId, name);
 
+        //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
+
         return file;
     }
 
@@ -37,13 +39,13 @@ public class ConvertService {
                 new TextToTXTCommandHandlerImpl()
                         .execute(text, file);
 
-                file = setExtension(file, "txt");
+                file = setExtension(file, name, "txt");
                 break;
             case TO_PDF:
                 new TextToPDFCommandHandlerImpl()
                         .execute(text, file);
 
-                file = setExtension(file, "txt");
+                file = setExtension(file, name, "txt");
                 break;
         }
 

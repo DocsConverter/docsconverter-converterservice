@@ -45,10 +45,8 @@ public class ReceiveService {
 
                 if(task.getType().equals(TEXT)){
                     file = convertService.convertText(task.getChatId(), task.getText(), task.getAction());
-
                     task.setType(DOCUMENT);
                 } else {
-                    //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
                     file = convertService.convert(task.getChatId(), task.getUrl(), task.getType(), task.getAction());
                 }
 
