@@ -24,11 +24,9 @@ public class ConvertService {
 
     public File convert(long chatId, String url, FileType type, Command command) throws IOException{
         String name = getName(url);
-
-        File file = createTempFile(chatId, name);
-
         String outputName = getName(FilenameUtils.removeExtension(url));
 
+        File file = createTempFile(chatId, name);
         File fileOutput = createTempFile(chatId, outputName);
 
         FileUtils.copyURLToFile(new URL(url), file);
