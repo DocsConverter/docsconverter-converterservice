@@ -1,5 +1,6 @@
 package com.github.docsconverter.docsconverterconverterservice.service;
 
+import com.github.docsconverter.docsconverterconverterservice.command.ImageToPDFCommandHandlerImpl;
 import com.github.docsconverter.docsconverterconverterservice.command.TextToPDFCommandHandlerImpl;
 import com.github.docsconverter.docsconverterconverterservice.command.TextToTXTCommandHandlerImpl;
 import com.github.docsconverter.docsconverterconverterservice.enums.Command;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
+import static com.github.docsconverter.docsconverterconverterservice.enums.Command.TO_PDF;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.createTempFile;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.setExtension;
 import static com.github.docsconverter.docsconverterconverterservice.util.TaskUtil.getName;
@@ -21,10 +24,24 @@ public class ConvertService {
         String name = getName(url);
 
         File file = createTempFile(chatId, name);
+        File fileOutput = createTempFile(chatId, name);
 
-        //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
+        FileUtils.copyURLToFile(new URL(url), file);
 
-        return file;
+        switch (type) {
+            case PHOTO:
+                if (TO_PDF.equals(command)) {
+                    new ImageToPDFCommandHandlerImpl()
+                            .execute(file, fileOutput);
+
+                    fileOutput = setExtension(fileOutput, name, "PDF");
+                }
+                break;
+            case DOCUMENT:
+                break;
+        }
+
+        return fileOutput;
     }
 
     public File convertText(long chatId, String text, Command command) throws IOException {
