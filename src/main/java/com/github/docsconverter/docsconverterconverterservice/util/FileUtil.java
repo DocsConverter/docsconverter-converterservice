@@ -11,7 +11,7 @@ public class FileUtil {
 
     public static File setExtension(File file, String name, String extension){
 
-        String path = FilenameUtils.removeExtension(file.getAbsolutePath())
+        String path = file.getAbsolutePath()
                 .replace(name, name + "." + extension);
 
         File newFile = new File(path);
