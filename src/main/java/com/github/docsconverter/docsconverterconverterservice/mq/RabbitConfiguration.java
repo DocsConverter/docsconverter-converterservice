@@ -15,6 +15,9 @@ import java.net.URISyntaxException;
 
 @Configuration
 public class RabbitConfiguration {
+    public static final String CONVERT_QUEUE = "convert";
+    public static final String CONVERT_RESULT_QUEUE = "convert";
+
     @Bean
     public ConnectionFactory connectionFactory() {
         try {
@@ -36,11 +39,11 @@ public class RabbitConfiguration {
 
     @Bean
     public Queue convertQueue() {
-        return new Queue("convert");
+        return new Queue(CONVERT_QUEUE);
     }
 
     @Bean
     public Queue convertResultQueue() {
-        return new Queue("convert_result");
+        return new Queue(CONVERT_RESULT_QUEUE);
     }
 }
