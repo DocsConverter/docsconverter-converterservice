@@ -1,10 +1,13 @@
 package com.github.docsconverter.docsconverterconverterservice.service;
 
 import com.github.docsconverter.docsconverterconverterservice.enums.Command;
+import com.github.docsconverter.docsconverterconverterservice.enums.FileType;
 import com.github.docsconverter.docsconverterconverterservice.to.Task;
 import com.github.docsconverter.docsconverterconverterservice.util.FileUtil;
 import com.github.docsconverter.docsconverterconverterservice.util.TaskUtil;
+import org.apache.commons.io.FileSystemUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,12 +49,18 @@ public class ReceiveService {
                 if(task.getType().equals(TEXT)){
                     file = convertService.convertText(task.getChatId(), task.getText(), task.getAction());
                     task.setType(DOCUMENT);
+
                 } else {
                     file = convertService.convert(task.getChatId(), task.getUrl(), task.getType(), task.getAction());
                 }
 
-                task.setUrl(getUrl(task.getChatId(), FileUtil.getName(file.getAbsolutePath())));
+                String path = file.getAbsolutePath();
+
+                task.setUrl(getUrl(task.getChatId(), FileUtil.getName(path)));
+
+                task.setType(FileType.getFileType(FilenameUtils.getExtension(path)));
             }
+
 
             task.setCompleted(true);
         } catch (Exception e){

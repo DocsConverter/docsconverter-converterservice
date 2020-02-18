@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import static com.github.docsconverter.docsconverterconverterservice.enums.Command.TO_PDF;
+import static com.github.docsconverter.docsconverterconverterservice.enums.FileType.DOCUMENT;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.createTempFile;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.setExtension;
 import static com.github.docsconverter.docsconverterconverterservice.util.TaskUtil.getName;
@@ -34,7 +35,7 @@ public class ConvertService {
                     new ImageToPDFCommandHandlerImpl()
                             .execute(file, fileOutput);
 
-                    fileOutput = setExtension(fileOutput, name, "PDF");
+                    fileOutput = setExtension(fileOutput, name, "pdf");
                 }
                 break;
             case DOCUMENT:

@@ -9,7 +9,7 @@ import java.io.OutputStream;
 
 @Service
 public class FileService {
-    public static final String ROOT_PATH = "/tmp";
+    public static final String ROOT_PATH = FileUtils.getTempDirectoryPath();
 
     public void download(File file, OutputStream stream){
         try {
