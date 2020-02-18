@@ -45,7 +45,7 @@ public class ConvertService {
                 new TextToPDFCommandHandlerImpl()
                         .execute(text, file);
 
-                file = setExtension(file, name, "txt");
+                file = setExtension(file, name, "pdf");
                 break;
         }
 
