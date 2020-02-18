@@ -48,7 +48,7 @@ public class ReceiveService {
                 if(task.getType().equals(TEXT)){
                     String[] split = task.getText().split(" ");
 
-                    name = split[0];
+                    name = split[0]+".txt";
 
                     File file = createTempFile(task.getChatId(), name);
 
