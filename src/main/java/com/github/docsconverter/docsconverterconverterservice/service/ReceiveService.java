@@ -71,6 +71,7 @@ public class ReceiveService {
         } catch (Exception e){
             task.setCompleted(false);
             sendService.sendTask(task);
+            e.printStackTrace();
         }
     }
 }
