@@ -31,7 +31,7 @@ public class ReceiveService {
         this.convertService = convertService;
     }
 
-    public void receive(String message) throws IOException {
+    public void receive(String message) {
         logger.info("Received from convert: " + message);
 
         Task task = TaskUtil.deserializeToObject(message);
