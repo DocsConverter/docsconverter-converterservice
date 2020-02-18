@@ -6,6 +6,7 @@ import com.github.docsconverter.docsconverterconverterservice.command.TextToTXTC
 import com.github.docsconverter.docsconverterconverterservice.enums.Command;
 import com.github.docsconverter.docsconverterconverterservice.enums.FileType;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -25,7 +26,10 @@ public class ConvertService {
         String name = getName(url);
 
         File file = createTempFile(chatId, name);
-        File fileOutput = createTempFile(chatId, name + "o");
+
+        String outputName = getName(FilenameUtils.removeExtension(url));
+
+        File fileOutput = createTempFile(chatId, outputName);
 
         FileUtils.copyURLToFile(new URL(url), file);
 
@@ -35,7 +39,7 @@ public class ConvertService {
                     new ImageToPDFCommandHandlerImpl()
                             .execute(file, fileOutput);
 
-                    fileOutput = setExtension(fileOutput, name + "o", "pdf");
+                    fileOutput = setExtension(fileOutput, outputName, "pdf");
                 }
                 break;
             case DOCUMENT:

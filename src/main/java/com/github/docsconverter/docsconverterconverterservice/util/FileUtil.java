@@ -1,7 +1,5 @@
 package com.github.docsconverter.docsconverterconverterservice.util;
 
-import org.apache.commons.io.FilenameUtils;
-
 import java.io.File;
 import java.io.IOException;
 
