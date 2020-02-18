@@ -18,11 +18,12 @@ public class FileUtil {
     }
 
     public static String getName(String path){
-        return path.split("_")[2];
+
+        return path.split("|")[2];
     }
 
     public static File createTempFile(long chatId, String name) throws IOException {
-        return File.createTempFile(chatId + "_", "_" + name);
+        return File.createTempFile(chatId + "|", "|" + name);
     }
 
     public static File getTempFile(Long chatId, String name) throws IOException {
@@ -30,13 +31,11 @@ public class FileUtil {
 
         if(list!= null) {
             for (File file : list) {
-                String[] fileName = file.getName().split("_");
+                String[] fileName = file.getName().split("|");
 
-                if (fileName.length >= 3 &&
+                if (fileName.length == 3 &&
                         fileName[0].equals(chatId.toString()) &&
-                        fileName[2].equals(name) ||
-                        (fileName.length > 3 &&
-                                (fileName[2] + fileName[3]).equals(name.replace("_", ""))) ) {
+                        fileName[2].equals(name)) {
                     return file;
                 }
             }
