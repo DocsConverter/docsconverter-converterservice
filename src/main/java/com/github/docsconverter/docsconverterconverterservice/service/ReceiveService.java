@@ -61,7 +61,6 @@ public class ReceiveService {
                 task.setType(FileType.getFileType(FilenameUtils.getExtension(path)));
             }
 
-
             task.setCompleted(true);
         } catch (Exception e){
             e.printStackTrace();

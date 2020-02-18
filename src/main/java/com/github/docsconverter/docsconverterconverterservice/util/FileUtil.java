@@ -32,9 +32,11 @@ public class FileUtil {
             for (File file : list) {
                 String[] fileName = file.getName().split("_");
 
-                if (fileName.length == 3
-                        && fileName[0].equals(chatId.toString())
-                        && fileName[2].equals(name)) {
+                if (fileName.length >= 3 &&
+                        fileName[0].equals(chatId.toString()) &&
+                        fileName[2].equals(name) ||
+                        (fileName.length > 3 &&
+                                (fileName[2] + fileName[3]).equals(name.replace("_", ""))) ) {
                     return file;
                 }
             }

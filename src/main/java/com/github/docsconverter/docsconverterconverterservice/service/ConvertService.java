@@ -39,7 +39,7 @@ public class ConvertService {
                 }
                 break;
             case DOCUMENT:
-                break;
+                return null;
         }
 
         return fileOutput;
