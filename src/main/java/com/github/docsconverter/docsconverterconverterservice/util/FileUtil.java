@@ -11,7 +11,7 @@ public class FileUtil {
         String path = file.getAbsolutePath();
         String[] splitPath = path.split(".");
 
-        String newName = splitPath.length == 1 ?
+        String newName = splitPath.length == 0 ?
                 path + "." + extension :
                 path.replace(splitPath[splitPath.length-1], extension);
 
