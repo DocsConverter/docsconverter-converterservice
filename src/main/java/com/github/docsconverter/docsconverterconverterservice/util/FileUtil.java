@@ -4,7 +4,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 
 import static com.github.docsconverter.docsconverterconverterservice.service.FileService.ROOT_PATH;
 
@@ -33,10 +32,7 @@ public class FileUtil {
     }
 
     public static String getUrl(long chatId, String name){
-        return ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/download/{chatId}/{name}")
-                .buildAndExpand(chatId, name)
-                .toString();
+        return System.getenv("URL")
+                .concat("/download/" + chatId + "/" + name);
     }
 }
