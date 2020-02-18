@@ -16,6 +16,7 @@ import java.net.URL;
 
 import static com.github.docsconverter.docsconverterconverterservice.enums.FileType.TEXT;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.createTempFile;
+import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.getUrl;
 import static com.github.docsconverter.docsconverterconverterservice.util.TaskUtil.getName;
 
 @Service
@@ -38,15 +39,30 @@ public class ReceiveService {
         try {
             if(task.getAction().equals(Command.TO_TEXT)){
                 convertService.convertToText(task.getUrl(), task.getType());
+
+
             } else {
-                File file = createTempFile(task.getChatId(), getName(task.getUrl()));
+                String name;
 
                 if(task.getType().equals(TEXT)){
+                    String[] split = task.getText().split(" ");
+
+                    name = split[0];
+
+                    File file = createTempFile(task.getChatId(), name);
+
                     convertService.convertText(task.getText(), task.getAction(), file);
                 } else {
+                    name = getName(task.getUrl());
+
+                    File file = createTempFile(task.getChatId(), name);
+
                     //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
                     convertService.convert(task.getUrl(), task.getType(), task.getAction(), file);
                 }
+
+
+                task.setUrl(getUrl(task.getChatId(), name));
             }
 
             task.setCompleted(true);
