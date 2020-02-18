@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import static com.github.docsconverter.docsconverterconverterservice.enums.FileType.DOCUMENT;
 import static com.github.docsconverter.docsconverterconverterservice.enums.FileType.TEXT;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.createTempFile;
 import static com.github.docsconverter.docsconverterconverterservice.util.FileUtil.getUrl;
@@ -52,6 +53,8 @@ public class ReceiveService {
                     File file = createTempFile(task.getChatId(), name);
 
                     convertService.convertText(task.getText(), task.getAction(), file);
+
+                    task.setType(DOCUMENT);
                 } else {
                     name = getName(task.getUrl());
 
@@ -60,7 +63,6 @@ public class ReceiveService {
                     //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
                     convertService.convert(task.getUrl(), task.getType(), task.getAction(), file);
                 }
-
 
                 task.setUrl(getUrl(task.getChatId(), name));
             }
