@@ -33,6 +33,6 @@ public class FileUtil {
 
     public static String getUrl(long chatId, String name){
         return System.getenv("URL")
-                .concat("/download/" + chatId + "/" + name);
+                .concat("/file/download/" + chatId + "/" + name);
     }
 }
