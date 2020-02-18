@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import static com.github.docsconverter.docsconverterconverterservice.mq.RabbitConfiguration.CONVERT_QUEUE;
+
 @EnableRabbit
 @Component
 public class TaskListener {
@@ -15,7 +17,7 @@ public class TaskListener {
         this.service = service;
     }
 
-    @RabbitListener(queues = "convert")
+    @RabbitListener(queues = CONVERT_QUEUE)
     public void processConvert(String message) {
         service.receive(message);
     }

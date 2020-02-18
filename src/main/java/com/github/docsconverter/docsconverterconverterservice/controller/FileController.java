@@ -31,8 +31,6 @@ public class FileController {
     public void download(HttpServletResponse response, @PathVariable Long chatId, @PathVariable String name) throws IOException {
         log.info("DOWNLOAD FILENAME = {}, CHAT_ID = {}", name, chatId.toString());
 
-        System.out.println(createTempFile(chatId, name).getAbsolutePath());
-
         File file = getTempFile(chatId, name);
 
         response.setContentLength((int) file.length());
