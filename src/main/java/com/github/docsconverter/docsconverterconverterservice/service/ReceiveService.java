@@ -42,13 +42,14 @@ public class ReceiveService {
                 convertService.convertToText(task.getUrl(), task.getType());
             } else {
                 String name;
+                File file;
 
                 if(task.getType().equals(TEXT)){
                     String[] split = task.getText().split(" ");
 
                     name = split[0];
 
-                    File file = createTempFile(task.getChatId(), name);
+                    file = createTempFile(task.getChatId(), name);
 
                     convertService.convertText(task.getText(), task.getAction(), file);
 
@@ -56,13 +57,13 @@ public class ReceiveService {
                 } else {
                     name = getName(task.getUrl());
 
-                    File file = createTempFile(task.getChatId(), name);
+                    file = createTempFile(task.getChatId(), name);
 
                     //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
                     convertService.convert(task.getUrl(), task.getType(), task.getAction(), file);
                 }
 
-                task.setUrl(getUrl(task.getChatId(), name));
+                task.setUrl(getUrl(task.getChatId(), FileUtil.getName(file.getAbsolutePath())));
             }
 
             task.setCompleted(true);

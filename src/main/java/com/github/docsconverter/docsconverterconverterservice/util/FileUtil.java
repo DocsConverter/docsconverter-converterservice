@@ -1,5 +1,7 @@
 package com.github.docsconverter.docsconverterconverterservice.util;
 
+import com.github.docsconverter.docsconverterconverterservice.enums.Command;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,6 +21,10 @@ public class FileUtil {
         file.renameTo(newFile);
 
         return newFile;
+    }
+
+    public static String getName(String path){
+        return path.split("_")[2];
     }
 
     public static File createTempFile(long chatId, String name) throws IOException {
