@@ -39,40 +39,27 @@ public class ReceiveService {
 
         try {
             if(task.getAction().equals(Command.TO_TEXT)){
-                convertService.convertToText(task.getUrl(), task.getType());
+                convertService.convertToText(task.getChatId(), task.getUrl(), task.getType());
             } else {
-                String name;
                 File file;
 
                 if(task.getType().equals(TEXT)){
-                    String[] split = task.getText().split(" ");
-
-                    name = split[0];
-
-                    file = createTempFile(task.getChatId(), name);
-
-                    convertService.convertText(task.getText(), task.getAction(), file);
+                    file = convertService.convertText(task.getChatId(), task.getText(), task.getAction());
 
                     task.setType(DOCUMENT);
                 } else {
-                    name = getName(task.getUrl());
-
-                    file = createTempFile(task.getChatId(), name);
-
                     //FileUtils.copyURLToFile(new URL(task.getUrl()), file);
-                    convertService.convert(task.getUrl(), task.getType(), task.getAction(), file);
+                    file = convertService.convert(task.getChatId(), task.getUrl(), task.getType(), task.getAction());
                 }
 
                 task.setUrl(getUrl(task.getChatId(), FileUtil.getName(file.getAbsolutePath())));
             }
 
             task.setCompleted(true);
-            sendService.sendTask(task);
-
         } catch (Exception e){
-            task.setCompleted(false);
-            sendService.sendTask(task);
             e.printStackTrace();
         }
+
+        sendService.sendTask(task);
     }
 }
