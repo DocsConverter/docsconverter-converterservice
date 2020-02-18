@@ -21,6 +21,8 @@ public class ReceiveService {
 
         Task task = TaskUtil.deserializeToObject(message);
 
+        task.setCompleted(true);
+
         sendService.sendTask(task);
 
 //        switch (task.getType()){
