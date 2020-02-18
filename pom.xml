@@ -34,7 +34,7 @@
 					<assembleDirectory>target</assembleDirectory>
 					<programs>
 						<program>
-							<mainClass>com.github.docsconverter.docsconverterconverterservice.DocsconverterConverterserviceApplication</mainClass>
+							<mainClass>com.github.docsconverter.docsconverterconverterservice.DocsConverterConverterServiceApplication</mainClass>
 							<name>docsconverter-converterservice</name>
 						</program>
 					</programs>

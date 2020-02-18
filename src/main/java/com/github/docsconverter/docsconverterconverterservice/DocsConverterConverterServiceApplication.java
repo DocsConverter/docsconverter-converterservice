@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DocsconverterConverterserviceApplication {
+public class DocsConverterConverterServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DocsconverterConverterserviceApplication.class, args);
+		SpringApplication.run(DocsConverterConverterServiceApplication.class, args);
 	}
 
 }
