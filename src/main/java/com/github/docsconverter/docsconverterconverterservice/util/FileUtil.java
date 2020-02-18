@@ -1,5 +1,7 @@
 package com.github.docsconverter.docsconverterconverterservice.util;
 
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -8,7 +10,8 @@ import static com.github.docsconverter.docsconverterconverterservice.service.Fil
 public class FileUtil {
 
     public static File setExtension(File file, String name, String extension){
-        String path = file.getAbsolutePath()
+
+        String path = FilenameUtils.removeExtension(file.getAbsolutePath())
                 .replace(name, name + "." + extension);
 
         File newFile = new File(path);
@@ -18,12 +21,11 @@ public class FileUtil {
     }
 
     public static String getName(String path){
-
-        return path.split("|")[2];
+        return path.split("+")[2];
     }
 
     public static File createTempFile(long chatId, String name) throws IOException {
-        return File.createTempFile(chatId + "|", "|" + name);
+        return File.createTempFile(chatId + "+", "+" + name);
     }
 
     public static File getTempFile(Long chatId, String name) throws IOException {
@@ -31,7 +33,7 @@ public class FileUtil {
 
         if(list!= null) {
             for (File file : list) {
-                String[] fileName = file.getName().split("|");
+                String[] fileName = file.getName().split("+");
 
                 if (fileName.length == 3 &&
                         fileName[0].equals(chatId.toString()) &&
