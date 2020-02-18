@@ -25,7 +25,7 @@ public class ConvertService {
         String name = getName(url);
 
         File file = createTempFile(chatId, name);
-        File fileOutput = createTempFile(chatId, name);
+        File fileOutput = createTempFile(chatId, name + "o");
 
         FileUtils.copyURLToFile(new URL(url), file);
 
@@ -35,7 +35,7 @@ public class ConvertService {
                     new ImageToPDFCommandHandlerImpl()
                             .execute(file, fileOutput);
 
-                    fileOutput = setExtension(fileOutput, name, "pdf");
+                    fileOutput = setExtension(fileOutput, name + "o", "pdf");
                 }
                 break;
             case DOCUMENT:
